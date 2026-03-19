@@ -9,21 +9,14 @@
     h1 { font-size: 24px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
     h2 { font-size: 18px; margin-top: 32px; color: #222; }
     .lang-toggle { text-align: right; margin-bottom: 20px; }
-    .lang-toggle a { color: #4CAF50; cursor: pointer; }
+    .lang-toggle a { color: #4CAF50; cursor: pointer; text-decoration: underline; }
     .en { display: none; }
     .updated { color: #888; font-size: 14px; }
   </style>
-  <script>
-    function toggleLang() {
-      document.querySelectorAll('.ko').forEach(e => e.style.display = e.style.display === 'none' ? '' : 'none');
-      document.querySelectorAll('.en').forEach(e => e.style.display = e.style.display === 'none' ? '' : 'none');
-    }
-  </script>
 </head>
 <body>
-  <div class="lang-toggle"><a onclick="toggleLang()">English / 한국어</a></div>
+  <div class="lang-toggle"><a id="lang-btn">English / 한국어</a></div>
 
-  <!-- Korean -->
   <div class="ko">
     <h1>이용약관</h1>
     <p class="updated">최종 수정일: 2026년 3월 19일</p>
@@ -56,7 +49,6 @@
     <p>서비스 관련 문의: <a href="mailto:raybirdy@petlog.app">raybirdy@petlog.app</a></p>
   </div>
 
-  <!-- English -->
   <div class="en">
     <h1>Terms of Service</h1>
     <p class="updated">Last updated: March 19, 2026</p>
@@ -88,5 +80,18 @@
     <h2>8. Contact</h2>
     <p>Service inquiries: <a href="mailto:raybirdy@petlog.app">raybirdy@petlog.app</a></p>
   </div>
+
+  <script>
+    document.getElementById('lang-btn').addEventListener('click', function() {
+      var koSections = document.querySelectorAll('.ko');
+      var enSections = document.querySelectorAll('.en');
+      for (var i = 0; i < koSections.length; i++) {
+        koSections[i].style.display = koSections[i].style.display === 'none' ? '' : 'none';
+      }
+      for (var i = 0; i < enSections.length; i++) {
+        enSections[i].style.display = enSections[i].style.display === 'none' ? '' : 'none';
+      }
+    });
+  </script>
 </body>
 </html>
