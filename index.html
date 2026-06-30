@@ -2,6 +2,18 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+  <!-- 언어 자동 분기: 한국어 locale → 이 페이지 유지 / 그 외 → 영문(/en/). 수동 선택(localStorage)은 존중. 렌더 전 실행. -->
+  <script>
+    (function () {
+      try {
+        var choice = localStorage.getItem('petlog_lang');
+        if (choice === 'ko') return;                 // 사용자가 한국어를 직접 선택 → 유지
+        if (choice === 'en') { location.replace('en/'); return; }
+        var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        if (lang.indexOf('ko') !== 0) location.replace('en/'); // 한국어 외 → 영문
+      } catch (e) {}
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetLog — 반려동물 건강 관리 앱 | 산책 기록, 사진 타임라인, 월별 리캡</title>
   <meta name="description" content="반려동물과의 매일을 기록하고 추억으로 되돌아보세요. 산책 기록, 사진 타임라인, 월별 리캡, 체중/병원/투약/예방접종 관리. 서버 없이 내 폰에 안전하게 저장. 무료." />
@@ -723,7 +735,7 @@
           <li><a href="#beforeafter">변화</a></li>
           <li><a href="#trust">신뢰</a></li>
           <li><a href="#cta">다운로드</a></li>
-          <li><a href="en/" class="lang-switch">English</a></li>
+          <li><a href="en/" class="lang-switch" onclick="try{localStorage.setItem('petlog_lang','en')}catch(e){}">English</a></li>
         </ul>
       </div>
     </div>
